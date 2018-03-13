@@ -7,6 +7,8 @@ var userCAP = 0;
 var enemyHP = 0;
 var enemyAP = 0;
 var enemyCAP = 0;
+var userWins = 0;
+var numberOfCards = 4;
 
 //Create objects for character tracking
 var pewDiePie = {
@@ -128,6 +130,7 @@ $(document).ready(function () {
 
     });
 
+    //Require input from user
     $('#attack-button').on('click', function () {
         if (!isCharacterChosen) {
             alert('Pick a YouTuber to attack with first.');
@@ -143,8 +146,14 @@ $(document).ready(function () {
                 return;
             } else if (enemyHP < 1) {
                 $('#opponent').empty();
+                userWins++;
                 isEnemyChosen = false;
+                if (userWins > (numberOfCards-2)) {
+                    alert('You Win');
+                };
             };
+
+
             $('div#opponent p.stats').html(`<p class="stats">AP:${enemyAP}<br>CAP:${enemyCAP}<br>HP:${enemyHP}</p>`);
             $('div#your-character p.stats').html(`<p class="stats">AP:${userAP}<br>CAP:${userCAP}<br>HP:${userHP}</p>`);
 
