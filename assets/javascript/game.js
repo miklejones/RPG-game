@@ -12,15 +12,15 @@ var enemyCAP = 0;
 var pewDiePie = {
     name: 'PewDiePie',
     healthPoints: 180,
-    attackPower: 13,
+    attackPower: 14,
     counterAttackPower: 25,
     imgSrc: 'assets/images/pewdiepie.jpg'
 };
 
 var h3h3 = {
     name: 'h3h3',
-    healthPoints: 100,
-    attackPower: 5,
+    healthPoints: 130,
+    attackPower: 7,
     counterAttackPower: 10,
     imgSrc: 'assets/images/h3h3.jpg'
 
@@ -29,7 +29,7 @@ var h3h3 = {
 var paulBrothers = {
     name: 'The Paul Brothers',
     healthPoints: 150,
-    attackPower: 10,
+    attackPower: 12,
     counterAttackPower: 20,
     imgSrc: 'assets/images/paulbrothers.jpg'
 
@@ -37,8 +37,8 @@ var paulBrothers = {
 
 var iDubbbztv = {
     name: 'iDubbbzTV',
-    healthPoints: 120,
-    attackPower: 8,
+    healthPoints: 135,
+    attackPower: 10,
     counterAttackPower: 15,
     imgSrc: 'assets/images/idubbbz.jpg'
 
@@ -63,11 +63,16 @@ $(document).ready(function () {
     //Place cards
     newRound();
 
+
+
+
+
     $("#character-options").on("click", ".character-piece", function () {
         if (isEnemyChosen) {
             return false;
         };
 
+        //Set card stats
         if (!isCharacterChosen) {
             console.log(this.id);
             switch (this.id) {
@@ -130,10 +135,27 @@ $(document).ready(function () {
             alert('Pick an enemy.');
         } else {
             userHP -= enemyCAP;
-            enemyHP -= userAP
+            enemyHP -= userAP;
             userAP = userAP + userAP;
+            //If user dies or if enemy dies
+            if (userHP < 1) {
+                alert('You lose')
+                return;
+            } else if (enemyHP < 1) {
+                $('#opponent').empty();
+                isEnemyChosen = false;
+            };
+            $('div#opponent p.stats').html(`<p class="stats">AP:${enemyAP}<br>CAP:${enemyCAP}<br>HP:${enemyHP}</p>`);
+            $('div#your-character p.stats').html(`<p class="stats">AP:${userAP}<br>CAP:${userCAP}<br>HP:${userHP}</p>`);
+
+            // If/else to determine wheather to remove card and choose and new enemy or update card
+
+
         };
     });
+
+
+
 
 });
 
