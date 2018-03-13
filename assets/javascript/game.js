@@ -143,6 +143,7 @@ $(document).ready(function () {
             //If user dies or if enemy dies
             if (userHP < 1) {
                 alert('You lose')
+                $('#your-character').empty();
                 return;
             } else if (enemyHP < 1) {
                 $('#opponent').empty();
